@@ -1,0 +1,182 @@
+$netease-red: #ff0000;
+$color-text-d: #333333;
+$color-text-dd: #151515;
+$color-text-l: #999999;
+
+.ell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ell2 {
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.full-screen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.font10 {
+  font-size: 12px;
+  transform: scale(.833);
+}
+
+@mixin floor($height: 40px, $fontSize: 12px, $color: #333333, $borderColor: #999999) {
+  display: flex;
+  height: $height;
+  font-size: $fontSize;
+  color: $color;
+  @if $borderColor {
+    border-bottom: 1px solid $borderColor;
+  }
+}
+
+@mixin arrow($width: 8px, $color: #333333, $direction: right) {
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    border: solid 1px $color;
+    width: $width;
+    height: $width;
+    @if $direction == right {
+      border-bottom-width: 0;
+      border-left-width: 0;
+      right: 0;
+    }
+    @if $direction == left {
+      border-top-width: 0;
+      border-right-width: 0;
+      left: 0;
+    }
+    @if $direction == up {
+      border-right-width: 0;
+      border-bottom-width: 0;
+      top: 0;
+    }
+    @if $direction == down {
+      border-top-width: 0;
+      border-left-width: 0;
+      bottom: 0;
+    }
+  }
+}
+
+@mixin btn-primary($height: auto, $padding: 10px, $bgColor: #ff0000) {
+  @if $bgColor {
+    background-color: $bgColor;
+  }
+
+  background-image: linear-gradient(-225deg, #FF3163 15%, #FF0000 85%);
+  border: 0;
+  color: #fff;
+  border-radius: 20px;
+  height: $height;
+  padding: 0 $padding;
+  box-sizing: border-box;
+}
+
+@mixin btn-outline($height: auto, $padding: 10px) {
+  @include border-1px($color: #ff0000, $radius: 20px);
+  background: #fff;
+  color: #ff0000;
+  border-radius: 20px;
+  height: $height;
+  padding: 0 $padding;
+  box-sizing: border-box;
+}
+
+@mixin border-1px($color: #f0f0f0, $radius: 0px, $style: solid) {
+  position: relative;
+  &:after {
+    content: '';
+    pointer-events: none;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: 0 0;
+    border: 1px $style $color;
+    border-radius: $radius;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    @media (min-resolution: 2dppx) {
+      width: 200%;
+      height: 200%;
+      border-radius: $radius * 2;
+      transform: scale(.5);
+    }
+    @media (min-resolution: 3dppx) {
+      width: 300%;
+      height: 300%;
+      border-radius: $radius * 3;
+      transform: scale(.333);
+    }
+  }
+}
+
+.border-top-1px {
+  @include border-1px;
+  &:after {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+  }
+}
+
+.border-bottom-1px {
+  @include border-1px;
+  &:after {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+  }
+}
+
+.border-left-1px {
+  @include border-1px;
+  &:after {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+  }
+}
+
+.border-right-1px {
+  @include border-1px;
+  &:after {
+    border-left-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+  }
+}
